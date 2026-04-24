@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f2f5;
+  font-family: sans-serif;
+  padding: 20px;
+}
+제미나이가 짠 거여서 채택 보류
+*/
+
+header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+}
+
+/* .chart-builder {
+
+} */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 600px; 
+    background-color: #ffffff;
+    margin: 0 auto; /*이게 가운데 정렬이라니 ㄹㅇ이가;*/
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.item {
+    background-color: #d6d6d6;
+    border: 1px dashed #434343; /* 테스트용 점선 */
+    border-radius: 4px;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center; /*가로 방향 가운데 정렬*/
+    align-items: center; /*세로 방향 가운데 정렬*/
+    /*이미지 기준 정렬법 다로 있다캄*/
+    /* .grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 이미지가 찌그러지지 않게 꽉 채움 */
+}
+
