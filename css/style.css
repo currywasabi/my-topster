@@ -15,6 +15,10 @@
 제미나이가 짠 거여서 채택 보류
 */
 
+body {
+  background-color: #303030;
+}
+
 header {
     background-color: black;
     color: white;
@@ -26,25 +30,41 @@ header {
 
 } */
 
+main {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar-container {
+  /* margin: 20px; 임시 */
+  width: 15%; /*임시*/
+  max-width: 150px;
+  background-color: #D6AD09; /*임시*/
+}
+
+.chart-builder {
+  margin: 0 auto; /*가운데 정렬*/
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    width: 100%;
-    max-width: 600px; 
-    background-color: #ffffff;
-    margin: 0 auto; /*이게 가운데 정렬이라니 ㄹㅇ이가;*/
-    margin-top: 20px;
+    width: 85%;
+    max-width: 510px; 
+    background-color: #000000;
+    /* margin-top: 20px; */
     padding: 10px;
-    border: 2px solid #000000;
-    border-radius: 10px;
+    /* border: 1px solid #000000; */
+    /* border-radius: 10px; */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .item {
+    word-break: break-all; /*자동 줄바꿈(임시)*/
     background-color: #d6d6d6;
-    border: 1px dashed #434343; /* 테스트용 점선 */
-    border-radius: 4px;
+    /* border: 1px dashed #434343; */
+    /* border-radius: 4px; */
     aspect-ratio: 1 / 1;
 
     display: flex;
@@ -57,3 +77,14 @@ header {
     object-fit: cover; 이미지가 찌그러지지 않게 꽉 채움 */
 }
 
+
+/* 화면 너비가 768px보다 작아지면 (태블릿/모바일) */
+/* @media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  
+  .sidebar-container {
+    width: 100%;
+  }
+}  */
