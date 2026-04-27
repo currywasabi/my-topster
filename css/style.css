@@ -1,90 +1,72 @@
+/* 모바일 우선 개발 할것임. */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f0f2f5;
-  font-family: sans-serif;
-  padding: 20px;
+img {
+  max-width: 100%; /* 이미지가 부모 박스보다 커지는 것 방지 (gemini)*/
+  height: auto; /* 비율 유지 (gemini)*/
 }
-제미나이가 짠 거여서 채택 보류
-*/
 
 body {
-  background-color: #303030;
+  /* background-color: #303030; */
+  background-image: linear-gradient( 110.6deg,  rgba(4,20,51,1) 11.3%, rgba(239,238,249,1) 91.7% );
+  min-height: 100vh;
 }
 
-header {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    font-size: 20px;
-}
 
-/* .chart-builder {
+/* main {
+    (반응형 웹 위해 display: flex 추가 예정?)
+    padding: 30px;
+} */ 
 
-} */
 
-main {
-  display: flex;
-  padding: 20px;
+.chart-builder {
+    margin: 0 auto; /*가운데 정렬*/
+    margin-top: 50px;
+    width: 85%;
+    max-width: 600px; 
 }
 
 .sidebar-container {
-  /* margin: 20px; 임시 */
-  width: 15%; /*임시*/
-  max-width: 150px;
-  background-color: #D6AD09; /*임시*/
-}
-
-.chart-builder {
-  margin: 0 auto; /*가운데 정렬*/
+    margin: 0 auto; /*가운데 정렬*/
+    margin-top: 20px;
+    padding: 10px;
+    width: 85%; /*임시*/
+    max-width: 600px;
+    background-color: #000000;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr) 1fr; /*앨범 + 제목*/
     gap: 10px;
-    width: 85%;
-    max-width: 510px; 
     background-color: #000000;
-    /* margin-top: 20px; */
     padding: 10px;
-    /* border: 1px solid #000000; */
-    /* border-radius: 10px; */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .item {
     word-break: break-all; /*자동 줄바꿈(임시)*/
-    background-color: #d6d6d6;
-    /* border: 1px dashed #434343; */
-    /* border-radius: 4px; */
+    background-color: #ffffff;
     aspect-ratio: 1 / 1;
 
     display: flex;
     justify-content: center; /*가로 방향 가운데 정렬*/
     align-items: center; /*세로 방향 가운데 정렬*/
-    /*이미지 기준 정렬법 다로 있다캄*/
-    /* .grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 이미지가 찌그러지지 않게 꽉 채움 */
 }
 
+.title-list {
+  color: #ffffff;
+  font-size: 12px;
+  list-style-position: inside; /* 삐져나오지 않게 */
+}
 
-/* 화면 너비가 768px보다 작아지면 (태블릿/모바일) */
-/* @media (max-width: 768px) {
-  main {
-    flex-direction: column;
-  }
-  
-  .sidebar-container {
-    width: 100%;
-  }
-}  */
+/* 데스크톱용 (1024px 이상) */
+/* PC 화면에서만 보일 레이아웃 변경 사항 작성 (gemini) */
+/* @media (min-width: 1024px) {
+   
+} */

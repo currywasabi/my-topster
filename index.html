@@ -8,32 +8,66 @@
     <title>듣다 | Make your own Topster</title>
 </head>
 <body>
-    <header>
-        듣다.
-        <button class="download-button">다운로드</button>
-        <button class="share-button">공유</button>
-    </header>
     <main>
-        <div class="sidebar-container">
-            사이드바임
-            <button>검색</button>
-        </div>
         <div class="chart-builder">
             <div id="chart" class="grid-container">
-                <div class="item">Loveless</div>
-                <div class="item">Speaking in Tongues</div>
-                <div class="item">Different Class</div>
-                <div class="item">OK Computer</div>
-                <div class="item">D>E>A>T>H>M>E>T>A>L</div>
-                <div class="item">Souvlaki</div>
-                <div class="item">THIRSTY</div>
-                <div class="item">Yankee Hotel Foxtrot</div>
-                <div class="item">Screamadelica</div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <ol class="title-list">
+                    <li>test1</li>
+                    <li>test2</li>
+                    <li>test3</li>
+                </ol>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <ol class="title-list"></ol>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <ol class="title-list"></ol>
             </div>
+        </div>
+        <div class="sidebar-container">
+            <img src="assets/logo_500X500.png" width="50px">
+            <input type="search" id="album-search" placeholder="추가할 앨범명 입력"> <!-- 일부러 form 태그 안 씌워 둠 -->
+            <button class="add-to-chart-button">앨범 추가</button>
+            <button class="download-button">다운로드(껍데기)</button>
+            <button class="share-button">공유(껍데기)</button>
         </div>
     </main>
 
+    <script>
+        const searchInput = document.querySelector('#album-search');
+        const addChartBtn = document.querySelector('.add-to-chart-button');
+        const albumList = [];
 
-    <script type="module" src="js/main.js"></script>
+        addChartBtn.addEventListener('click', function(){
+            const albumTitle = searchInput.value;
+
+            //예외처리
+            if (albumTitle.trim() === ""){
+                alert("최소 1글자 이상 입력해 주세요.");
+                return;
+            }
+            if (albumList.length === 9){
+                alert("탑스터가 가득 찼습니다.");
+                return;
+            }
+            
+            albumList.push(albumTitle);
+            document.querySelectorAll('.item')[albumList.length - 1].innerHTML = albumTitle;
+        });
+
+
+        // 삭제
+        // :hover 이용해 커서 올리면 닫기 버튼 뜸
+        // 닫기 누르면 그 원소 사라짐, 나머지 반복문 돌려서 한 칸 앞으로 당기기? 고민 좀 해봐야 할듯.
+
+    </script>
+
+    <!-- <script type="module" src="js/main.js"></script> -->
+    <!-- 나중에 더 익숙해진 다음 적용해도 늦지 않다 -->
 </body>
 </html>
