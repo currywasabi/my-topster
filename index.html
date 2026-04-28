@@ -11,39 +11,91 @@
     <main>
         <div class="chart-builder">
             <div id="chart" class="grid-container">
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <ol class="title-list">
-                    <li>test1</li>
-                    <li>test2</li>
-                    <li>test3</li>
+                <div class="item">
+                    <!-- span태그 -> 이미지 도입하면 대체 예정 -->
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="0">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="1">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="2">X</button>
+                </div>
+                <ol class="title-list"> <!-- 평소 none / 그리드 채워질 시 block -->
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
                 </ol>
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <ol class="title-list"></ol>
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <ol class="title-list"></ol>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="3">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="4">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="5">X</button>
+                </div>
+                <ol class="title-list">
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
+                </ol>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="6">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="7">X</button>
+                </div>
+                <div class="item">
+                    <span class="temp-text-container"></span>
+                    <button class="delete-button" data-index="8">X</button>
+                </div>
+                <ol class="title-list">
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
+                    <li class="title-list-item"></li>
+                </ol>
+                <img src="assets/logo_500X500.png" id="logo">
             </div>
         </div>
         <div class="sidebar-container">
-            <img src="assets/logo_500X500.png" width="50px">
-            <input type="search" id="album-search" placeholder="추가할 앨범명 입력"> <!-- 일부러 form 태그 안 씌워 둠 -->
-            <button class="add-to-chart-button">앨범 추가</button>
-            <button class="download-button">다운로드(껍데기)</button>
-            <button class="share-button">공유(껍데기)</button>
+            <div class="sidebar-container-navbar"> 
+                <form action="#" class="search-form" autocomplete="off">
+                    <input type="search" id="album-search" placeholder="추가할 앨범명 입력">
+                    <button type="submit" class="add-to-chart-button">앨범 추가</button>
+                </form>
+            
+                <button class="download-button">다운로드(껍데기)</button>
+                <button class="share-button">공유(껍데기)</button>
+            </div>
         </div>
     </main>
 
     <script>
         const searchInput = document.querySelector('#album-search');
+        const searchForm = document.querySelector(".search-form");
         const addChartBtn = document.querySelector('.add-to-chart-button');
-        const albumList = [];
 
-        addChartBtn.addEventListener('click', function(){
+        const albumList = Array(9).fill("");
+
+        // n번째 그리드 내용 / 우측 앨범 타이틀 바꿔 주는 함수
+        function changeItems(index, title){
+            document.querySelectorAll('.temp-text-container')[index].innerHTML = title;
+            document.querySelectorAll('.title-list-item')[index].innerHTML = title;
+        }
+
+        // 앨범 추가
+        searchForm.addEventListener('submit', function(e){
+            e.preventDefault(); //중요! submit하면 기본으로 새로고침
+
             const albumTitle = searchInput.value;
 
             //예외처리
@@ -51,20 +103,31 @@
                 alert("최소 1글자 이상 입력해 주세요.");
                 return;
             }
-            if (albumList.length === 9){
-                alert("탑스터가 가득 찼습니다.");
-                return;
-            }
             
-            albumList.push(albumTitle);
-            document.querySelectorAll('.item')[albumList.length - 1].innerHTML = albumTitle;
+            for (let i = 0; i < 9; i++){
+                if (albumList[i] === ""){
+                    albumList[i] = albumTitle;
+                    changeItems(i, albumTitle);
+                    searchInput.value = ""; //입력창 초기화
+                    break;
+                }
+                // 탑스터 가득 찼는지 여부 테스트
+                if (i === 8) {
+                    alert("탑스터가 가득 찼습니다.");
+                    searchInput.value = "";
+                    return;
+                }
+            }
         });
 
-
-        // 삭제
-        // :hover 이용해 커서 올리면 닫기 버튼 뜸
-        // 닫기 누르면 그 원소 사라짐, 나머지 반복문 돌려서 한 칸 앞으로 당기기? 고민 좀 해봐야 할듯.
-
+        // 앨범 삭제
+        document.querySelector('.grid-container').addEventListener('click', function(e){
+            if (albumList[e.target.dataset.index] !== "") {
+                albumList[e.target.dataset.index] = "";
+                changeItems(e.target.dataset.index, "");
+            }
+        })
+        
     </script>
 
     <!-- <script type="module" src="js/main.js"></script> -->

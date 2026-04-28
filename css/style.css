@@ -9,6 +9,7 @@
 img {
   max-width: 100%; /* 이미지가 부모 박스보다 커지는 것 방지 (gemini)*/
   height: auto; /* 비율 유지 (gemini)*/
+  display: block; /* 이미지 하단 유령 간격 제거 (gemini) */
 }
 
 body {
@@ -17,52 +18,91 @@ body {
   min-height: 100vh;
 }
 
-
 /* main {
     (반응형 웹 위해 display: flex 추가 예정?)
     padding: 30px;
 } */ 
 
-
 .chart-builder {
-    margin: 0 auto; /*가운데 정렬*/
-    margin-top: 50px;
-    width: 85%;
-    max-width: 600px; 
+  margin: 0 auto; /*가운데 정렬*/
+  padding-top: 50px;
+  width: 85%;
+  max-width: 600px; 
 }
 
 .sidebar-container {
-    margin: 0 auto; /*가운데 정렬*/
-    margin-top: 20px;
-    padding: 10px;
-    width: 85%; /*임시*/
-    max-width: 600px;
-    background-color: #000000;
+  margin: 0 auto; /*가운데 정렬*/
+  margin-top: 20px;
+  padding: 10px;
+  width: 85%; /*임시*/
+  max-width: 600px;
+  background-color: #000000;
+}
+
+.sidebar-container-navbar{
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-container-navbar .search-form {
+  display: flex;
+  align-items: stretch; /* 부모 요소에 맞춤 */
+  gap: 5px;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) 1fr; /*앨범 + 제목*/
-    gap: 10px;
-    background-color: #000000;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1fr; /*앨범 + 제목*/
+  gap: 10px;
+  background-color: #000000;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.grid-container #logo {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 40px;
 }
 
 .item {
-    word-break: break-all; /*자동 줄바꿈(임시)*/
-    background-color: #ffffff;
-    aspect-ratio: 1 / 1;
+  position: relative;
+  padding: 5px;
+  word-break: break-all; /*자동 줄바꿈(임시)*/
+  background-color: #ffffff;
+  aspect-ratio: 1 / 1;
 
-    display: flex;
-    justify-content: center; /*가로 방향 가운데 정렬*/
-    align-items: center; /*세로 방향 가운데 정렬*/
+  display: flex;
+  justify-content: center; /*가로 방향 가운데 정렬*/
+  align-items: center; /*세로 방향 가운데 정렬*/
+}
+
+.item .delete-button {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  /* appearance: none; */
+  background-color: #0009;
+  color: #fff;
+  border: none;
+}
+
+.item .delete-button:hover {
+  background-color: rgb(174, 0, 0);
 }
 
 .title-list {
   color: #ffffff;
   font-size: 12px;
-  list-style-position: inside; /* 삐져나오지 않게 */
+  list-style-type: none;
+  /* list-style-position: inside; 숫자 아예 없으면 필요없을지도?*/
 }
 
 /* 데스크톱용 (1024px 이상) */
