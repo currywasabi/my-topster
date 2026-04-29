@@ -25,7 +25,7 @@ body {
 
 .chart-builder {
   margin: 0 auto; /*가운데 정렬*/
-  padding-top: 50px;
+  padding-top: 70px;
   width: 85%;
   max-width: 600px; 
 }
@@ -59,7 +59,7 @@ body {
   gap: 10px;
   background-color: #000000;
   padding: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /*없어도 되지 않나?*/
 }
 
 .grid-container #logo {
@@ -82,7 +82,7 @@ body {
 }
 
 .item .delete-button {
-  display: block;
+  display: none;
   position: absolute;
   top: 5px;
   right: 5px;
@@ -96,6 +96,11 @@ body {
 
 .item .delete-button:hover {
   background-color: rgb(174, 0, 0);
+}
+
+/* 이렇게 간단하게 해결되는 거였다구?!?!?!!? */
+.item:hover .delete-button {
+  display: block;
 }
 
 .title-list {
