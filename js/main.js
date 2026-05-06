@@ -7,7 +7,7 @@ const gridContainer = document.querySelector(".grid-container");
 let gridState = {
   rows: 3,
   cols: 3,
-  albumList: new Array(3*3).fill(null) // new 한번 지워보기
+  albumList: new Array(3*3).fill(null)
 }
 
 function render() {
@@ -71,7 +71,25 @@ function deleteAlbum(index) {
   render();
 }
 
+function updateGridSize(row, col) {
+  const oldAlbumList = gridState.albumList;
+
+  gridState.rows = row;
+  gridState.cols = col;
+  gridState.albumList = Array(row*col).fill(null);
+
+  oldAlbumList.forEach((album, index) => {
+    if (index < row*col) {
+      gridState.albumList[index] = album;
+    }
+  });
+
+  render();
+}
+
+
 // ***********************************************
+
 
 render();
 // window.addEventListener('DOMContentLoaded', () => render());
@@ -92,6 +110,20 @@ searchForm.addEventListener("submit", function (e) {
   searchInput.value = ""; //입력창 초기화
 });
 
+// 삭제
 gridContainer.addEventListener("click", function (e) {
-  deleteAlbum(e.target.dataset.index); // 문자열 그대로 집어넣은 건데...
+  // 문자열 그대로 집어넣었지만 작동은 한다
+  deleteAlbum(e.target.dataset.index);
 });
+
+// 그리드 사이즈 바꾸기
+// 이벤트 위임이란 무엇일까?
+document.querySelector('.three-by-three').addEventListener('click', () => {
+  updateGridSize(3, 3);
+})
+document.querySelector('.four-by-four').addEventListener('click', () => {
+  updateGridSize(4, 4);
+})
+document.querySelector('.five-by-five').addEventListener('click', () => {
+  updateGridSize(5, 5);
+})
