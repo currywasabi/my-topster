@@ -52,6 +52,18 @@ body {
   gap: 5px;
 }
 
+.sidebar-container-range {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-container-range .sidebar-slider {
+  width: 270px;
+  accent-color: #ffd95d;
+}
+
 .grid-container {
   position: relative;
   display: grid;
@@ -66,7 +78,7 @@ body {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 40px;
+  width: 35px;
 }
 
 .item {
@@ -98,7 +110,6 @@ body {
   background-color: rgb(174, 0, 0);
 }
 
-/* 이렇게 간단하게 해결되는 거였다구?!?!?!!? */
 .item:hover .delete-button {
   display: block;
 }
@@ -107,11 +118,14 @@ body {
   color: #ffffff;
   font-size: 12px;
   list-style-type: none;
-  /* list-style-position: inside; 숫자 아예 없으면 필요없을지도?*/
+  /* list-style-position: inside; */
+}
+
+.title-list .title-list-item {
+  font-size: 0.5rem;
 }
 
 /* 데스크톱용 (1024px 이상) */
 /* PC 화면에서만 보일 레이아웃 변경 사항 작성 (gemini) */
 /* @media (min-width: 1024px) {
-   
 } */

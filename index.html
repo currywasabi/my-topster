@@ -19,13 +19,22 @@
                     <input type="search" id="album-search" placeholder="추가할 앨범명 입력">
                     <button type="submit" class="add-to-chart-button">앨범 추가</button>
                 </form>
-                
+
                 <button class="download-button">다운로드</button>
                 <button class="share-button">공유</button>
-
-                <button class="resize-button three-by-three">3X3</button>
-                <button class="resize-button four-by-four">4X4</button>
-                <button class="resize-button five-by-five">5X5</button>
+            </div>
+            <div class="sidebar-container-range">
+                <div class="width-range-container">
+                    <!-- 이거 value 3으로 하는 게 아니라 gridState에 연동시켜야 하지 않을까. -->
+                    <label for="width-range">Width : </label>
+                    <output for="width-range" id="width-output"></output>
+                    <input type="range" id="width-range" class="sidebar-slider" min="1" max="10" step="1" value="3">
+                </div>
+                <div class="height-range-container">
+                    <label for="height-range">Height : </label>
+                    <output for="height-range" id="height-output"></output>
+                    <input type="range" id="height-range" class="sidebar-slider" min="1" max="10" step="1" value="3">
+                </div>
             </div>
         </div>
     </main>

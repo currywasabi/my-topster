@@ -2,15 +2,13 @@ const searchInput = document.querySelector("#album-search");
 const searchForm = document.querySelector(".search-form");
 const addChartBtn = document.querySelector(".add-to-chart-button");
 const gridContainer = document.querySelector(".grid-container");
+const rangeContainer = document.querySelector(".sidebar-container-range");
 
 const gridController = {
   gridState : {
     albumList: new Array(100).fill(null),
     rows: 3,
     cols: 3,
-    get gridSize() {
-      return this.rows * this.cols;
-    }
   },
 
   get gridSize() {
@@ -75,7 +73,7 @@ const gridController = {
 
   deleteAlbum(index) {
     const newAlbumList = [...this.gridState.albumList];
-    newAlbumList[index] = input;
+    newAlbumList[index] = null;
     this.updateState({ albumList : newAlbumList });
   },
 
@@ -85,7 +83,7 @@ const gridController = {
 
   // 제미나이 추천
   updateState(newData) {
-    this.gridState = { ...this.gridState, ...newData};
+    this.gridState = { ...this.gridState, ...newData };
     this.render()
   }
 }
@@ -114,19 +112,24 @@ searchForm.addEventListener("submit", function (e) {
 });
 
 // 삭제
+// 문자열 그대로 집어넣었지만 작동은 한다
 gridContainer.addEventListener("click", function (e) {
-  // 문자열 그대로 집어넣었지만 작동은 한다
   gridController.deleteAlbum(e.target.dataset.index);
 });
 
 // 그리드 사이즈 바꾸기
-// 이벤트 위임이란 무엇일까?
-document.querySelector('.three-by-three').addEventListener('click', () => {
-  gridController.updateGridSize(3, 3);
-})
-document.querySelector('.four-by-four').addEventListener('click', () => {
-  gridController.updateGridSize(4, 4);
-})
-document.querySelector('.five-by-five').addEventListener('click', () => {
-  gridController.updateGridSize(5, 5);
-})
+// 이벤트 위임
+// 정신없어서 일부러 input 대신 change
+const widthValue = document.querySelector("#width-range");
+const heightValue = document.querySelector("#height-range");
+const widthOutput = document.querySelector("#width-output");
+const heightOutput = document.querySelector("#height-output");
+//초기화(축약 가능하지 않을까?)
+widthOutput.textContent = widthValue.value;
+heightOutput.textContent = heightValue.value;
+
+rangeContainer.addEventListener("change", () => {
+  widthOutput.textContent = widthValue.value;
+  heightOutput.textContent = heightValue.value;
+  gridController.updateGridSize(Number(heightValue.value), Number(widthValue.value));
+});
