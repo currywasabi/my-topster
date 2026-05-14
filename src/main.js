@@ -1,4 +1,5 @@
 import { renderGrid } from './worker/renderer.js';
+import { search } from './lib/api.js';
 
 const searchInput = document.querySelector("#album-search");
 const searchForm = document.querySelector(".search-form");
@@ -91,4 +92,14 @@ rangeContainer.addEventListener("change", () => {
   widthOutput.textContent = widthValue.value;
   heightOutput.textContent = heightValue.value;
   gridController.updateGridSize(Number(heightValue.value), Number(widthValue.value));
+});
+
+// 임시 api!!!!!! by using MusicBrainz
+
+const tempSearchBtn = document.querySelector("#tempSearchBtn");
+
+tempSearchBtn.addEventListener("click", () => {
+  if (searchInput.value.trim() !== "") {
+    search(searchInput.value.trim());
+  }
 });

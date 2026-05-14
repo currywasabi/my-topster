@@ -13,6 +13,7 @@
             <div id="chart" class="grid-container">
             </div>
         </div>
+
         <div class="sidebar-container">
             <div class="sidebar-container-navbar"> 
                 <form action="#" class="search-form" autocomplete="off">
@@ -20,6 +21,8 @@
                     <button type="submit" class="add-to-chart-button">앨범 추가</button>
                 </form>
 
+                <!-- 임시 추가 -->
+                <button class="search-button" id="tempSearchBtn">(임시!)앨범 검색</button>
                 <button class="download-button">다운로드</button>
                 <button class="share-button">공유</button>
             </div>
@@ -37,6 +40,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="results-container">
+            <div id="status"></div>
+            <div id="results"></div>
+        </div>
+
     </main>
 
     <script type="module" src="../src/main.js"></script>

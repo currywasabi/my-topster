@@ -129,3 +129,55 @@ body {
 /* PC 화면에서만 보일 레이아웃 변경 사항 작성 (gemini) */
 /* @media (min-width: 1024px) {
 } */
+
+/* 임시!!!!!!!!!!!!!!!!! */
+
+.results-container {
+  margin: 0 auto; /*가운데 정렬*/
+  margin-top: 20px;
+  padding: 10px;
+  width: 85%; /*임시*/
+  max-width: 600px;
+  background-color: #000000;
+}
+#status {
+  margin-bottom: 16px;
+  color: #666;
+  font-size: 14px;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.card .no-cover {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #eee;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #999;
+}
+
+.card .title { font-size: 13px; color: #ffffff; font-weight: bold; }
+.card .artist { font-size: 12px; color: #666; }
+.card .year { font-size: 11px; color: #999; }
