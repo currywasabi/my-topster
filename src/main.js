@@ -2,8 +2,7 @@ import { renderGrid } from './worker/renderer.js';
 import { search } from './lib/api.js';
 
 const searchInput = document.querySelector("#album-search");
-const searchForm = document.querySelector(".search-form");
-const addChartBtn = document.querySelector(".add-to-chart-button");
+// const searchForm = document.querySelector(".search-form");
 const gridContainer = document.querySelector(".grid-container");
 const rangeContainer = document.querySelector(".sidebar-container-range");
 
@@ -56,34 +55,17 @@ const gridController = {
 
 gridController.render();
 
-// 추가
-searchForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const albumTitle = searchInput.value;
-
-  if (albumTitle.trim() === "") {
-    alert("최소 1글자 이상 입력해 주세요.");
-    return;
-  }
-
-  gridController.addAlbum(albumTitle);
-  searchInput.value = ""; //입력창 초기화
-});
-
 // 삭제
-// 문자열 그대로 집어넣었지만 작동은 한다
 gridContainer.addEventListener("click", function (e) {
-  gridController.deleteAlbum(e.target.dataset.index);
+  gridController.deleteAlbum(Number(e.target.dataset.index));
 });
 
-// 그리드 사이즈 바꾸기
-// 이벤트 위임
-// 정신없어서 일부러 input 대신 change
+// 그리드 사이즈 바꾸기 (이벤트 위임 활용)
 const widthValue = document.querySelector("#width-range");
 const heightValue = document.querySelector("#height-range");
 const widthOutput = document.querySelector("#width-output");
 const heightOutput = document.querySelector("#height-output");
+
 //초기화(축약 가능하지 않을까?)
 widthOutput.textContent = widthValue.value;
 heightOutput.textContent = heightValue.value;
@@ -94,12 +76,41 @@ rangeContainer.addEventListener("change", () => {
   gridController.updateGridSize(Number(heightValue.value), Number(widthValue.value));
 });
 
+
+// ***********************************************
+
 // 임시 api!!!!!! by using MusicBrainz
 
 const tempSearchBtn = document.querySelector("#tempSearchBtn");
+const searchResults = document.querySelector("#results");
 
-tempSearchBtn.addEventListener("click", () => {
-  if (searchInput.value.trim() !== "") {
-    search(searchInput.value.trim());
+// 앨범 객체 생성자
+function Album(title, artist, src) {
+  this.title = title;
+  this.artist = artist;
+  this.src = src;
+}
+
+function doSearch(input) {
+  if (input.trim() !== "") {
+    document.querySelector('.results-container').style.display = "block";
+    search(input.trim());
   }
+}
+
+// 검색1 - 버튼 클릭
+tempSearchBtn.addEventListener("click", () => {
+  doSearch(searchInput.value);
+});
+
+// 검색2 - 엔터키 입력
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === 'Enter') doSearch(searchInput.value);
+});
+
+// 추가
+searchResults.addEventListener("click", function (e) {
+  const target = e.target.closest('.card').dataset;
+  const newAlbum = new Album (target.title, target.artist, target.src);
+  gridController.addAlbum(newAlbum);
 });

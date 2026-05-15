@@ -46,10 +46,8 @@ body {
   align-items: center;
 }
 
-.sidebar-container-navbar .search-form {
-  display: flex;
-  align-items: stretch; /* 부모 요소에 맞춤 */
-  gap: 5px;
+.sidebar-container-navbar #album-search {
+  width: 280px;
 }
 
 .sidebar-container-range {
@@ -83,7 +81,7 @@ body {
 
 .item {
   position: relative;
-  padding: 5px;
+  /* padding: 5px; */
   word-break: break-all; /*자동 줄바꿈(임시)*/
   background-color: #ffffff;
   aspect-ratio: 1 / 1;
@@ -106,12 +104,12 @@ body {
   border: none;
 }
 
-.item .delete-button:hover {
-  background-color: rgb(174, 0, 0);
-}
-
 .item:hover .delete-button {
   display: block;
+}
+
+.item .delete-button:hover {
+  background-color: rgb(174, 0, 0);
 }
 
 .title-list {
@@ -133,17 +131,13 @@ body {
 /* 임시!!!!!!!!!!!!!!!!! */
 
 .results-container {
+  display: none;
   margin: 0 auto; /*가운데 정렬*/
   margin-top: 20px;
   padding: 10px;
   width: 85%; /*임시*/
   max-width: 600px;
   background-color: #000000;
-}
-#status {
-  margin-bottom: 16px;
-  color: #666;
-  font-size: 14px;
 }
 
 #results {
@@ -166,6 +160,10 @@ body {
   background: #eee;
 }
 
+.card img:hover {
+  cursor: pointer;
+}
+
 .card .no-cover {
   width: 100%;
   aspect-ratio: 1;
@@ -180,4 +178,3 @@ body {
 
 .card .title { font-size: 13px; color: #ffffff; font-weight: bold; }
 .card .artist { font-size: 12px; color: #666; }
-.card .year { font-size: 11px; color: #999; }

@@ -1,15 +1,20 @@
-const createItemHtml = (index, album) => `
-    <div class="item">
-        <span class="temp-text-container">${album === null ? '' : album}</span>
+const createItemHtml = (index, album) => {
+    let itemHTML = `<div class="item">`;
+    if (album !== null) {
+        itemHTML += `<img src="${album.src}"></img>`
+    }
+    itemHTML += `
         <button class="delete-button" data-index="${index}">X</button>
-    </div>
-`;
+    </div>`
+    
+    return itemHTML;
+}
 
 const createTitleListHtml = (rowAlbums) => {
     let titleListHTML = `<ol class="title-list">`;
     rowAlbums.forEach(rowAlbum => {
         if (rowAlbum !== null) {
-            titleListHTML += `<li class="title-list-item">${rowAlbum}</li>`
+            titleListHTML += `<li class="title-list-item">${rowAlbum.artist} - ${rowAlbum.title}</li>`
         }
     });
     titleListHTML += `</ol>`;

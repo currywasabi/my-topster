@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Album Cover Finder</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    #search-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      background: #333;
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    #status {
+      margin-bottom: 16px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    #results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #eee;
+    }
+
+    .card .no-cover {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #eee;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .card .title { font-size: 13px; font-weight: bold; }
+    .card .artist { font-size: 12px; color: #666; }
+    .card .year { font-size: 11px; color: #999; }
+  </style>
+</head>
+<body>
+
+  <h2>Album Cover Finder</h2>
+
+  <div id="search-row">
+    <input id="query" type="text" placeholder="앨범 이름 입력 (예: Abbey Road)" />
+    <button id="searchBtn">검색</button>
+  </div>
+
+  <div id="status"></div>
+  <div id="results"></div>
+
+  <script>
+    const MB_BASE  = 'https://musicbrainz.org/ws/2';
+    const CAA_BASE = 'https://coverartarchive.org';
+
+    document.getElementById('searchBtn').addEventListener('click', search);
+    document.getElementById('query').addEventListener('keydown', e => {
+      if (e.key === 'Enter') search();
+    });
+
+    async function search() {
+      const q = document.getElementById('query').value.trim();
+      if (!q) return;
+
+      document.getElementById('results').innerHTML = '';
+      document.getElementById('status').textContent = '검색 중…';
+
+      // 1. MusicBrainz에서 앨범 검색
+      const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=10`;
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'AlbumCoverApp/1.0 (example@email.com)' }
+      });
+      const data = await res.json();
+      const releases = data.releases || [];
+
+      document.getElementById('status').textContent = `${releases.length}개 결과`;
+
+      // 2. 각 앨범 카드 렌더링
+      releases.forEach(release => {
+        const mbid   = release.id;
+        const title  = release.title;
+        const artist = release['artist-credit']?.[0]?.artist?.name || '';
+        const year   = (release.date || '').slice(0, 4);
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="no-cover" id="img-${mbid}">No Cover</div>
+          <div class="title">${title}</div>
+          <div class="artist">${artist}</div>
+          ${year ? `<div class="year">${year}</div>` : ''}
+        `;
+        document.getElementById('results').appendChild(card);
+
+        // 3. Cover Art Archive에서 커버 이미지 로드
+        loadCover(mbid);
+      });
+    }
+
+    async function loadCover(mbid) {
+      try {
+        const res = await fetch(`${CAA_BASE}/release/${mbid}`, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) return; // 커버 없는 경우 그냥 종료
+
+        const data = await res.json();
+        const image = data.images?.find(i => i.front) || data.images?.[0];
+        if (!image) return;
+
+        const imgUrl = image.thumbnails?.['500'] || image.thumbnails?.large || image.image;
+
+        // 기존 placeholder를 img 태그로 교체
+        const placeholder = document.getElementById(`img-${mbid}`);
+        if (!placeholder) return;
+
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = 'album cover';
+        placeholder.replaceWith(img);
+      } catch {
+        // 커버 로드 실패 시 무시 (No Cover 유지)
+      }
+    }
+  </script>
+
+</body>
+</html>
