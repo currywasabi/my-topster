@@ -23,7 +23,7 @@ body {
     padding: 30px;
 } */ 
 
-.chart-builder {
+.grid-wrapper {
   margin: 0 auto; /*가운데 정렬*/
   padding-top: 70px;
   width: 85%;
@@ -39,30 +39,30 @@ body {
   background-color: #000000;
 }
 
-.sidebar-container-navbar{
+.search-bar{
   display: flex;
   padding: 5px;
   justify-content: center;
   align-items: center;
 }
 
-.sidebar-container-navbar #album-search {
-  width: 280px;
+.search-bar__input {
+  width: 240px;
 }
 
-.sidebar-container-range {
-  color: #ffffff;
+.grid-sizer {
+  color: #FAFAF8;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.sidebar-container-range .sidebar-slider {
+.grid-sizer__input--width, .grid-sizer__input--height {
   width: 270px;
   accent-color: #ffd95d;
 }
 
-.grid-container {
+.grid {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr) 1fr; /*앨범 + 제목*/
@@ -72,18 +72,18 @@ body {
   box-shadow: 0 4px 6px rgba(0,0,0,0.1); /*없어도 되지 않나?*/
 }
 
-.grid-container #logo {
+.grid #logo {
   position: absolute;
   bottom: 5px;
   right: 5px;
   width: 35px;
 }
 
-.item {
+.grid__item {
   position: relative;
   /* padding: 5px; */
   word-break: break-all; /*자동 줄바꿈(임시)*/
-  background-color: #ffffff;
+  background-color: #FAFAF8;
   aspect-ratio: 1 / 1;
 
   display: flex;
@@ -91,11 +91,11 @@ body {
   align-items: center; /*세로 방향 가운데 정렬*/
 }
 
-.item .delete-button {
+.grid__delete-btn {
   display: none;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 3px;
+  right: 3px;
   width: 25px;
   height: 25px;
   /* appearance: none; */
@@ -104,22 +104,22 @@ body {
   border: none;
 }
 
-.item:hover .delete-button {
+.grid__item:hover .grid__delete-btn {
   display: block;
 }
 
-.item .delete-button:hover {
+.grid__delete-btn:hover {
   background-color: rgb(174, 0, 0);
 }
 
-.title-list {
-  color: #ffffff;
+.grid__title-list {
+  color: #FAFAF8;
   font-size: 12px;
   list-style-type: none;
   /* list-style-position: inside; */
 }
 
-.title-list .title-list-item {
+.grid__title-item {
   font-size: 0.4rem;
 }
 
@@ -140,19 +140,19 @@ body {
   background-color: #000000;
 }
 
-#results {
+.results {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
 }
 
-.card {
+.results__card {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.card img {
+.results__card img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
@@ -160,11 +160,11 @@ body {
   background: #eee;
 }
 
-.card img:hover {
+.results__card img:hover {
   cursor: pointer;
 }
 
-.card .no-cover {
+.results__card .no-cover {
   width: 100%;
   aspect-ratio: 1;
   background: #eee;
@@ -176,5 +176,5 @@ body {
   color: #999;
 }
 
-.card .title { font-size: 13px; color: #ffffff; font-weight: bold; }
-.card .artist { font-size: 12px; color: #666; }
+.results__card .results__title { font-size: 13px; color: #FAFAF8; font-weight: bold; }
+.results__card .results__artist { font-size: 12px; color: #666; }

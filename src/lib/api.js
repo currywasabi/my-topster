@@ -2,7 +2,7 @@ const MB_BASE = "https://musicbrainz.org/ws/2";
 const CAA_BASE = "https://coverartarchive.org";
 
 function renderCard(releases) {
-  const results = document.getElementById("results");
+  const results = document.querySelector(".results");
 
   releases.forEach((release) => {
     const mbid = release.id;
@@ -10,13 +10,13 @@ function renderCard(releases) {
     const artist = release["artist-credit"]?.[0]?.artist?.name || "";
 
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "results__card";
     card.dataset.artist = artist;
     card.dataset.title = title;
     card.innerHTML = `
         <div class="no-cover" id="img-${mbid}">No Cover</div>
-        <div class="title">${title}</div>
-        <div class="artist">${artist}</div>
+        <div class="results__title">${title}</div>
+        <div class="results__artist">${artist}</div>
     `;
     results.appendChild(card);
 
@@ -26,6 +26,7 @@ function renderCard(releases) {
         const placeholder = card.querySelector(".no-cover");
         if (!placeholder) return;
         const img = document.createElement("img");
+        img.crossOrigin = "anonymous"; //없어도 됨. 단 CORS 오염 막기 위함이라고 Claude가.
         img.src = imgUrl;
         img.alt = "album cover";
         card.dataset.src = imgUrl;
@@ -38,12 +39,12 @@ function renderCard(releases) {
 }
 
 function resetResults() {
-  document.getElementById("results").innerHTML = "";
+  document.querySelector(".results").innerHTML = "";
 }
 
 export async function search(input) {
   const q = input.trim();
-  if (!q) return;
+  if (q === "") return;
 
   resetResults();
 
@@ -61,6 +62,7 @@ export async function search(input) {
     
     const data = await res.json();
     const releases = data.releases || [];
+    console.log(releases);
 
     renderCard(releases);
   } catch (e) {

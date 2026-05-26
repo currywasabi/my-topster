@@ -9,40 +9,35 @@
 </head>
 <body>
     <main>
-        <div class="chart-builder">
-            <div id="chart" class="grid-container">
-            </div>
+        <div class="grid-wrapper">
+            <div class="grid"></div>
         </div>
 
         <div class="sidebar-container">
-            <div class="sidebar-container-navbar"> 
-                <input type="search" id="album-search" placeholder="추가할 앨범명 입력">
-
-                <!-- 임시 추가 -->
-                <button class="search-button" id="tempSearchBtn">앨범 검색</button>
-
-                <!-- <button class="download-button">다운로드</button>
-                <button class="share-button">공유</button> -->
+            <div class="search-bar">
+                <input type="search" class="search-bar__input" placeholder="추가할 앨범명 입력">
+                <button class="search-bar__btn--search">앨범 검색</button>
+                <button class="search-bar__btn--download">다운로드</button>
+                <!-- <button class="share-button">공유</button> -->
             </div>
-            <div class="sidebar-container-range">
-                <div class="width-range-container">
+            <div class="grid-sizer">
+                <div class="grid-sizer__width">
                     <!-- 이거 value 3으로 하는 게 아니라 gridState에 연동시켜야 하지 않을까. -->
                     <label for="width-range">Width : </label>
-                    <output for="width-range" id="width-output"></output>
-                    <input type="range" id="width-range" class="sidebar-slider" min="1" max="10" step="1" value="3">
+                    <output for="width-range" class="grid-sizer__output--width"></output>
+                    <input type="range" id="width-range" class="grid-sizer__input--width" min="1" max="10" step="1" value="3">
                 </div>
-                <div class="height-range-container">
+                <div class="grid-sizer__height">
                     <label for="height-range">Height : </label>
-                    <output for="height-range" id="height-output"></output>
-                    <input type="range" id="height-range" class="sidebar-slider" min="1" max="10" step="1" value="3">
+                    <output for="height-range" class="grid-sizer__output--height"></output>
+                    <input type="range" id="height-range" class="grid-sizer__input--height" min="1" max="10" step="1" value="3">
                 </div>
             </div>
         </div>
 
         <div class="results-container">
-            <div id="results"></div>
+            <div class="results"></div>
         </div>
-
     </main>
 
     <script type="module" src="../src/main.js"></script>
