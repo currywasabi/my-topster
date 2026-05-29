@@ -26,7 +26,7 @@ function renderCard(releases) {
         const placeholder = card.querySelector(".no-cover");
         if (!placeholder) return;
         const img = document.createElement("img");
-        img.crossOrigin = "anonymous"; //없어도 됨. 단 CORS 오염 막기 위함이라고 Claude가.
+        img.crossOrigin = "anonymous"; // CORS 오염 막기 위함이라고 Claude가. (없어도 돌아가긴 함)
         img.src = imgUrl;
         img.alt = "album cover";
         card.dataset.src = imgUrl;

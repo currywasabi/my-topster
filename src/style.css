@@ -30,36 +30,11 @@ body {
   max-width: 600px; 
 }
 
-.sidebar-container {
-  margin: 0 auto; /*가운데 정렬*/
-  margin-top: 20px;
-  padding: 10px;
-  width: 85%; /*임시*/
-  max-width: 600px;
-  background-color: #000000;
-}
-
-.search-bar{
-  display: flex;
-  padding: 5px;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-bar__input {
-  width: 240px;
-}
-
 .grid-sizer {
   color: #FAFAF8;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.grid-sizer__input--width, .grid-sizer__input--height {
-  width: 270px;
-  accent-color: #ffd95d;
 }
 
 .grid {
@@ -106,6 +81,7 @@ body {
 
 .grid__item:hover .grid__delete-btn {
   display: block;
+  cursor: pointer;
 }
 
 .grid__delete-btn:hover {
@@ -123,12 +99,123 @@ body {
   font-size: 0.4rem;
 }
 
-/* 데스크톱용 (1024px 이상) */
-/* PC 화면에서만 보일 레이아웃 변경 사항 작성 (gemini) */
-/* @media (min-width: 1024px) {
-} */
+.grid-sizer__input--width, .grid-sizer__input--height {
+  width: 270px;
+  accent-color: #ffd95d;
+}
 
-/* 임시!!!!!!!!!!!!!!!!! */
+.sidebar-container {
+  margin: 0 auto; /*가운데 정렬*/
+  margin-top: 20px;
+  padding: 10px;
+  width: 85%; /*임시*/
+  max-width: 600px;
+  background-color: #000000;
+}
+
+.search-bar{
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+}
+
+.search-bar__input {
+  display: flex;
+  /* width: 50%; */
+  width: 300px;
+}
+
+.search-bar__btn--search {
+  width: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.floating-controls {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 2%;
+  right: 2%;
+  gap: 10px;
+}
+
+.floating-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  min-height: 50px;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.floating-controls button:hover {
+  cursor: pointer;
+}
+
+.floating-controls__btn--download {
+  background-color: #000000;
+  color: #FAFAE8;
+}
+
+.floating-controls__btn--download:hover {
+  background-color: #FAFAE8;
+  /* background-color: #f8db00; */
+  color: #000000;
+}
+
+.floating-controls__btn--download:active {
+  background-color: #ffec5d;
+  cursor: pointer;
+}
+
+.floating-controls__grid-sizer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-height: 50px;
+  gap: 30px;
+  border-radius: 25px;
+  background-color: #FAFAE8;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.floating-controls__grid-sizer:hover {
+  max-height: 400px;
+}
+
+.floating-controls__btn--menu {
+  background-color: #FAFAE8;
+}
+
+.floating-controls__grid-sizer button:not(.floating-controls__btn--menu) {
+  background-color: #FAFAE8;
+}
+
+.floating-controls__grid-sizer button:hover:not(.floating-controls__btn--menu) {
+  background-color: #000000;
+  color: #FAFAE8;
+}
+
+
+
+
+
 
 .results-container {
   display: none;

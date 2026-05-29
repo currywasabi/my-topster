@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/style.css">
     <link rel="icon" href="image/logo_500X500.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>듣다 | Make your own Topster</title>
 </head>
 <body>
@@ -15,11 +16,12 @@
 
         <div class="sidebar-container">
             <div class="search-bar">
-                <input type="search" class="search-bar__input" placeholder="추가할 앨범명 입력">
-                <button class="search-bar__btn--search">앨범 검색</button>
-                <button class="search-bar__btn--download">다운로드</button>
-                <!-- <button class="share-button">공유</button> -->
+                <input type="search" class="search-bar__input" placeholder="  추가할 앨범명 입력">
+                <button class="search-bar__btn--search">
+                    <i class="material-icons">search</i>
+                </button>
             </div>
+
             <div class="grid-sizer">
                 <div class="grid-sizer__width">
                     <!-- 이거 value 3으로 하는 게 아니라 gridState에 연동시켜야 하지 않을까. -->
@@ -31,6 +33,36 @@
                     <label for="height-range">Height : </label>
                     <output for="height-range" class="grid-sizer__output--height"></output>
                     <input type="range" id="height-range" class="grid-sizer__input--height" min="1" max="10" step="1" value="3">
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-controls">
+            <button class="floating-controls__btn--download">
+                    <i class="material-icons">download</i>
+            </button>
+            <div class="floating-controls__grid-sizer">
+                <button class="floating-controls__btn--menu">
+                    <i class="material-icons">menu</i>
+                </button>
+                
+                <div class="temp1">
+                    <button class="floating-controls__btn--plus-width">
+                        <i class="material-icons">add</i>
+                    </button>
+                    행조절<br>
+                    <button class="floating-controls__btn--minus-width">
+                        <i class="material-icons">remove</i>
+                    </button>
+                </div>
+                <div class="temp2">
+                    <button class="floating-controls__btn--plus-height">
+                        <i class="material-icons">add</i>
+                    </button>
+                    열조절<br>
+                    <button class="floating-controls__btn--minus-height">
+                        <i class="material-icons">remove</i>
+                    </button>
                 </div>
             </div>
         </div>

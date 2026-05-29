@@ -6,13 +6,14 @@ const grid = document.querySelector(".grid");
 
 const searchInput = document.querySelector(".search-bar__input");
 const searchBtn = document.querySelector(".search-bar__btn--search");
-const downloadBtn = document.querySelector('.search-bar__btn--download');
 
 const gridSizer = document.querySelector(".grid-sizer");
 const widthValue = document.querySelector(".grid-sizer__input--width");
 const heightValue = document.querySelector(".grid-sizer__input--height");
 const widthOutput = document.querySelector(".grid-sizer__output--width");
 const heightOutput = document.querySelector(".grid-sizer__output--height");
+
+const downloadBtn = document.querySelector('.floating-controls__btn--download');
 
 const searchResults = document.querySelector(".results");
 
@@ -128,9 +129,38 @@ searchInput.addEventListener("keydown", (event) => {
 
 
 // ***********************************************
-// 그리드 캡쳐(탑스터 다운로드 항목)
+// floating active button 파트
 
 
 downloadBtn.addEventListener("click", () => {
   capture(grid);
+});
+
+const plusWidthBtn = document.querySelector(".floating-controls__btn--plus-width");
+const minusWidthBtn = document.querySelector(".floating-controls__btn--minus-width");
+const plusHeightBtn = document.querySelector(".floating-controls__btn--plus-height");
+const minusHeightBtn = document.querySelector(".floating-controls__btn--minus-height");
+
+plusWidthBtn.addEventListener("click", () => {
+  if (gridController.gridState.rows < 10) {
+    gridController.updateGridSize(gridController.gridState.rows + 1, gridController.gridState.cols);
+  }
+});
+
+minusWidthBtn.addEventListener("click", () => {
+  if (gridController.gridState.rows > 1) {
+    gridController.updateGridSize(gridController.gridState.rows - 1, gridController.gridState.cols);
+  }
+});
+
+plusHeightBtn.addEventListener("click", () => {
+  if (gridController.gridState.cols < 10) {
+    gridController.updateGridSize(gridController.gridState.rows, gridController.gridState.cols + 1);
+  }
+});
+
+minusHeightBtn.addEventListener("click", () => {
+  if (gridController.gridState.cols > 1) {
+    gridController.updateGridSize(gridController.gridState.rows + 1, gridController.gridState.cols - 1);
+  }
 });
