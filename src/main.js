@@ -14,6 +14,9 @@ const widthOutput = document.querySelector(".grid-sizer__output--width");
 const heightOutput = document.querySelector(".grid-sizer__output--height");
 
 const downloadBtn = document.querySelector('.floating-controls__btn--download');
+const floatingGridSizer = document.querySelector(".floating-controls__grid-sizer");
+const colsOutput = document.querySelector(".floating-controls__output--cols");
+const rowsOutput = document.querySelector(".floating-controls__output--rows");
 
 const searchResults = document.querySelector(".results");
 
@@ -65,6 +68,7 @@ const gridController = {
 
 
 gridController.render();
+updateSizerOutput ();
 
 
 // 앨범 추가
@@ -77,24 +81,6 @@ searchResults.addEventListener("click", function (e) {
 // 앨범 삭제
 grid.addEventListener("click", function (e) {
   gridController.deleteAlbum(Number(e.target.dataset.index));
-});
-
-
-// ***********************************************
-// 그리드 사이즈 조절 파트 (이벤트 위임 활용)
-
-
-//초기화(축약 가능하지 않을까?)
-widthOutput.textContent = widthValue.value;
-heightOutput.textContent = heightValue.value;
-
-gridSizer.addEventListener("input", () => {
-  widthOutput.textContent = widthValue.value;
-  heightOutput.textContent = heightValue.value;
-});
-
-gridSizer.addEventListener("change", () => {
-  gridController.updateGridSize(Number(heightValue.value), Number(widthValue.value));
 });
 
 
@@ -136,31 +122,29 @@ downloadBtn.addEventListener("click", () => {
   capture(grid);
 });
 
-const plusWidthBtn = document.querySelector(".floating-controls__btn--plus-width");
-const minusWidthBtn = document.querySelector(".floating-controls__btn--minus-width");
-const plusHeightBtn = document.querySelector(".floating-controls__btn--plus-height");
-const minusHeightBtn = document.querySelector(".floating-controls__btn--minus-height");
+function updateSizerOutput () {
+  const { cols, rows } = gridController.gridState;
+  colsOutput.textContent = `${cols}칸`;
+  rowsOutput.textContent = `${rows}칸`;
+}
 
-plusWidthBtn.addEventListener("click", () => {
-  if (gridController.gridState.rows < 10) {
-    gridController.updateGridSize(gridController.gridState.rows + 1, gridController.gridState.cols);
-  }
-});
+floatingGridSizer.addEventListener("click", (e) => {
+  const btn = e.target.closest('.floating-controls__btn--sizer');
+  if (!btn) return;
 
-minusWidthBtn.addEventListener("click", () => {
-  if (gridController.gridState.rows > 1) {
-    gridController.updateGridSize(gridController.gridState.rows - 1, gridController.gridState.cols);
-  }
-});
+  console.log(btn);
 
-plusHeightBtn.addEventListener("click", () => {
-  if (gridController.gridState.cols < 10) {
-    gridController.updateGridSize(gridController.gridState.rows, gridController.gridState.cols + 1);
-  }
-});
+  const axis = btn.dataset.axis;
+  const dir = Number(btn.dataset.dir);
+  const current = gridController.gridState[axis];
+  const next = current + dir;
 
-minusHeightBtn.addEventListener("click", () => {
-  if (gridController.gridState.cols > 1) {
-    gridController.updateGridSize(gridController.gridState.rows + 1, gridController.gridState.cols - 1);
-  }
+  if (next < 1 || next > 10) return;
+
+  gridController.updateGridSize(
+    axis === "rows" ? next : gridController.gridState.rows,
+    axis === "cols" ? next : gridController.gridState.cols
+  );
+
+  updateSizerOutput ();
 });

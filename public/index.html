@@ -21,20 +21,6 @@
                     <i class="material-icons">search</i>
                 </button>
             </div>
-
-            <div class="grid-sizer">
-                <div class="grid-sizer__width">
-                    <!-- 이거 value 3으로 하는 게 아니라 gridState에 연동시켜야 하지 않을까. -->
-                    <label for="width-range">Width : </label>
-                    <output for="width-range" class="grid-sizer__output--width"></output>
-                    <input type="range" id="width-range" class="grid-sizer__input--width" min="1" max="10" step="1" value="3">
-                </div>
-                <div class="grid-sizer__height">
-                    <label for="height-range">Height : </label>
-                    <output for="height-range" class="grid-sizer__output--height"></output>
-                    <input type="range" id="height-range" class="grid-sizer__input--height" min="1" max="10" step="1" value="3">
-                </div>
-            </div>
         </div>
 
         <div class="floating-controls">
@@ -42,25 +28,28 @@
                     <i class="material-icons">download</i>
             </button>
             <div class="floating-controls__grid-sizer">
+                <!-- 기능 없음 -->
                 <button class="floating-controls__btn--menu">
                     <i class="material-icons">menu</i>
                 </button>
                 
-                <div class="temp1">
-                    <button class="floating-controls__btn--plus-width">
+                <div class="floating-controls__col-sizer">
+                    <button class="floating-controls__btn--sizer" data-axis="cols" data-dir="1">
                         <i class="material-icons">add</i>
                     </button>
-                    행조절<br>
-                    <button class="floating-controls__btn--minus-width">
+                    <p>가로</p>
+                    <div class="floating-controls__output--cols"></div>
+                    <button class="floating-controls__btn--sizer" data-axis="cols" data-dir="-1">
                         <i class="material-icons">remove</i>
                     </button>
                 </div>
-                <div class="temp2">
-                    <button class="floating-controls__btn--plus-height">
+                <div class="floating-controls__row-sizer">
+                    <button class="floating-controls__btn--sizer" data-axis="rows" data-dir="1">
                         <i class="material-icons">add</i>
                     </button>
-                    열조절<br>
-                    <button class="floating-controls__btn--minus-height">
+                    <p>세로</p>
+                    <div class="floating-controls__output--rows"></div>
+                    <button class="floating-controls__btn--sizer" data-axis="rows" data-dir="-1">
                         <i class="material-icons">remove</i>
                     </button>
                 </div>
