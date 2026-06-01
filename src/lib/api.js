@@ -3,6 +3,7 @@ const CAA_BASE = "https://coverartarchive.org";
 
 function renderCard(releases) {
   const results = document.querySelector(".results");
+  result.innerHTML = "";
 
   releases.forEach((release) => {
     const mbid = release.id;
@@ -26,29 +27,22 @@ function renderCard(releases) {
         const placeholder = card.querySelector(".no-cover");
         if (!placeholder) return;
         const img = document.createElement("img");
-        img.crossOrigin = "anonymous"; // CORS 오염 막기 위함이라고 Claude가. (없어도 돌아가긴 함)
+        img.crossOrigin = "anonymous"; // CORS 오염 방지 (없어도 돌아가긴 함)
         img.src = imgUrl;
         img.alt = "album cover";
         card.dataset.src = imgUrl;
         placeholder.replaceWith(img);
       })
       .catch(() => {
-        // 실패 시 No Cover 유지 (아무것도 안 해도 됨)
+        // 실패 시 No Cover 유지
       });
   });
-}
-
-function resetResults() {
-  document.querySelector(".results").innerHTML = "";
 }
 
 export async function search(input) {
   const q = input.trim();
   if (q === "") return;
 
-  resetResults();
-
-  // MusicBrainz에서 앨범 검색
   const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=15`;
 
   try {
@@ -82,5 +76,5 @@ async function loadCover(mbid) {
   if (!image) throw new Error("no image");
 
   const imgUrl = image.thumbnails?.["500"] || image.thumbnails?.large || image.image;
-  return imgUrl; // URL만 반환, DOM은 여기서 절대 건드리지 않음
+  return imgUrl;
 }
