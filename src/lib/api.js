@@ -1,9 +1,51 @@
 const MB_BASE = "https://musicbrainz.org/ws/2";
 const CAA_BASE = "https://coverartarchive.org";
 
+export async function search(input) {
+  const q = input.trim();
+  if (q === "") return;
+
+  const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=15`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {"User-Agent": "Deutda_Topster/1.0 (demo) (maxpark0329@gmail.com)"}
+    });
+
+    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+    
+    const data = await res.json();
+    const releases = data.releases || [];
+    console.log(releases);
+
+    renderCard(releases);
+  } catch (e) {
+    console.error(e);
+    alert("앨범 검색에 실패하였습니다.");
+  }
+}
+
+async function loadCover(mbid) {
+  const res = await fetch(`${CAA_BASE}/release/${mbid}`, {
+    headers: { Accept: "application/json" },
+  });
+  if (!res.ok) throw new Error("no cover");
+
+  const data = await res.json();
+  const image = data.images?.find((i) => i.front) || data.images?.[0];
+  if (!image) throw new Error("no image");
+
+  const imgUrl = image.thumbnails?.["500"] || image.thumbnails?.large || image.image;
+  return imgUrl;
+}
+
+
+// *************** DOM 조작 *****************
+
+
 function renderCard(releases) {
   const results = document.querySelector(".results");
-  result.innerHTML = "";
+  results.innerHTML = "";
 
   releases.forEach((release) => {
     const mbid = release.id;
@@ -37,44 +79,4 @@ function renderCard(releases) {
         // 실패 시 No Cover 유지
       });
   });
-}
-
-export async function search(input) {
-  const q = input.trim();
-  if (q === "") return;
-
-  const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=15`;
-
-  try {
-    const res = await fetch(url, {
-      headers: {
-      "User-Agent": "Deutda_Topster/1.0 (demo) (maxpark0329@gmail.com)",
-      },
-    });
-
-    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
-    
-    const data = await res.json();
-    const releases = data.releases || [];
-    console.log(releases);
-
-    renderCard(releases);
-  } catch (e) {
-    console.error(e);
-    alert("앨범 검색에 실패하였습니다.");
-  }
-}
-
-async function loadCover(mbid) {
-  const res = await fetch(`${CAA_BASE}/release/${mbid}`, {
-    headers: { Accept: "application/json" },
-  });
-  if (!res.ok) throw new Error("no cover");
-
-  const data = await res.json();
-  const image = data.images?.find((i) => i.front) || data.images?.[0];
-  if (!image) throw new Error("no image");
-
-  const imgUrl = image.thumbnails?.["500"] || image.thumbnails?.large || image.image;
-  return imgUrl;
 }

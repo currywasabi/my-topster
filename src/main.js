@@ -34,8 +34,11 @@ updateSizerOutput ();
 
 // 앨범 추가
 searchResults.addEventListener("click", function (e) {
-  const target = e.target.closest('.results__card').dataset;
-  const newAlbum = new Album (target.title, target.artist, target.src);
+  const target = e.target.closest('.results__card');
+  if (!target) return;
+
+  const targetData = target.dataset;
+  const newAlbum = new Album (targetData.title, targetData.artist, targetData.src);
   gridController.addAlbum(newAlbum);
   renderGrid(gridController.gridState);
 });
