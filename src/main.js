@@ -19,7 +19,9 @@ const floatingGridSizer = document.querySelector(".floating-controls__grid-sizer
 const colsOutput = document.querySelector(".floating-controls__output--cols");
 const rowsOutput = document.querySelector(".floating-controls__output--rows");
 
-const searchResults = document.querySelector(".results");
+const results = document.querySelector(".results");
+const resultsContainer = document.querySelector('.results-container');
+const resultsDeleteBtn = document.querySelector(".results-container__delete-btn");
 
 
 
@@ -33,11 +35,13 @@ updateSizerOutput ();
 // 앨범 그리드에 추가/삭제 파트*****************************
 
 // 앨범 추가
-searchResults.addEventListener("click", function (e) {
+results.addEventListener("click", function (e) {
   const target = e.target.closest('.results__card');
-  if (!target) return;
+  if (!target) return; // 앨범 커버 누른 거 맞는가
 
   const targetData = target.dataset;
+  if (!targetData.src) return; // 이미지 존재하는가
+
   const newAlbum = new Album (targetData.title, targetData.artist, targetData.src);
   gridController.addAlbum(newAlbum);
   renderGrid(gridController.gridState);
@@ -63,7 +67,7 @@ function Album(title, artist, src) {
 // 앨범 검색 (API 호출)
 function doSearch(input) {
   if (input.trim() !== "") {
-    document.querySelector('.results-container').style.display = "block";
+    resultsContainer.style.display = "block";
     search(input.trim());
   }
 }
@@ -76,6 +80,10 @@ searchBtn.addEventListener("click", () => {
 // 검색2 - 엔터키 입력
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === 'Enter') doSearch(searchInput.value);
+});
+
+resultsDeleteBtn.addEventListener("click", () => {
+  resultsContainer.style.display = "none";
 });
 
 

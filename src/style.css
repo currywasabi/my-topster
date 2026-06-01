@@ -7,9 +7,9 @@
 }
 
 img {
-  max-width: 100%; /* 이미지가 부모 박스보다 커지는 것 방지 (gemini)*/
-  height: auto; /* 비율 유지 (gemini)*/
-  display: block; /* 이미지 하단 유령 간격 제거 (gemini) */
+  max-width: 100%; /* 이미지가 부모 박스보다 커지는 것 방지 */
+  height: auto; /* 비율 유지 */
+  display: block; /* 이미지 하단 유령 간격 제거 */
 }
 
 body {
@@ -49,10 +49,10 @@ body {
 
 .grid__item {
   position: relative;
-  /* padding: 5px; */
   word-break: break-all; /*자동 줄바꿈(임시)*/
   background-color: #FAFAF8;
   aspect-ratio: 1 / 1;
+  overflow: hidden; /* 직사각형 사진은 자르기 */
 
   display: flex;
   justify-content: center; /*가로 방향 가운데 정렬*/
@@ -83,19 +83,15 @@ body {
 
 .grid__title-list {
   color: #FAFAF8;
-  font-size: 12px;
   list-style-type: none;
-  /* list-style-position: inside; */
+  /* container-type: inline-size; */
 }
 
 .grid__title-item {
+  white-space: nowrap;
   font-size: 0.4rem;
+  /* font-size: clamp(0.2rem, 6cqi, 1rem); */
 }
-/* 
-.grid-sizer__input--width, .grid-sizer__input--height {
-  width: 270px;
-  accent-color: #ffd95d;
-} */
 
 .sidebar-container {
   margin: 0 auto; /*가운데 정렬*/
@@ -207,13 +203,33 @@ body {
 }
 
 .results-container {
+  position: relative;
   display: none;
   margin: 0 auto; /*가운데 정렬*/
   margin-top: 20px;
   padding: 10px;
   width: 85%; /*임시*/
+  
   max-width: 600px;
+  min-height: 25px;
   background-color: #000000;
+}
+
+.results-container__delete-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 25px;
+  aspect-ratio: 1/1;
+
+  background-color: #1f1f1f;
+  border: none;
+  color: #FAFAE8;
+}
+
+.results-container__delete-btn:hover {
+  background-color: rgb(126, 0, 0);
+  cursor: pointer;
 }
 
 .results {

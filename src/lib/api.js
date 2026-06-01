@@ -8,6 +8,8 @@ export async function search(input) {
   const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=15`;
 
   try {
+    document.body.style.cursor = "wait";
+
     const res = await fetch(url, {
       headers: {"User-Agent": "Deutda_Topster/1.0 (demo) (maxpark0329@gmail.com)"}
     });
@@ -21,6 +23,7 @@ export async function search(input) {
     renderCard(releases);
   } catch (e) {
     console.error(e);
+    document.body.style.cursor = "default";
     alert("앨범 검색에 실패하였습니다.");
   }
 }
@@ -70,13 +73,17 @@ function renderCard(releases) {
         if (!placeholder) return;
         const img = document.createElement("img");
         img.crossOrigin = "anonymous"; // CORS 오염 방지 (없어도 돌아가긴 함)
+        img.loading = "lazy"; // 뷰포트 밖은 나중에 로딩 (최적화)
         img.src = imgUrl;
         img.alt = "album cover";
         card.dataset.src = imgUrl;
         placeholder.replaceWith(img);
+        document.body.style.cursor = "default";
       })
       .catch(() => {
         // 실패 시 No Cover 유지
       });
   });
+
+  document.body.style.cursor = "default";
 }
