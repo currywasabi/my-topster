@@ -5,7 +5,7 @@ export async function search(input) {
   const q = input.trim();
   if (q === "") return;
 
-  const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)}&fmt=json&limit=15`;
+  const url = `${MB_BASE}/release/?query=${encodeURIComponent(q)} AND type:album AND status:official&limit=30&fmt=json`;
 
   try {
     document.body.style.cursor = "wait";
@@ -17,6 +17,7 @@ export async function search(input) {
     if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
     
     const data = await res.json();
+    console.log(data);
     const releases = data.releases || [];
     console.log(releases);
 
