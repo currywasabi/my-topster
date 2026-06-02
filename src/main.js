@@ -89,11 +89,13 @@ resultsDeleteBtn.addEventListener("click", () => {
 
 // floating active button 파트**************************
 
-
+// 다운로드
 downloadBtn.addEventListener("click", () => {
   capture(grid);
 });
 
+
+// 사이즈 조절
 function updateSizerOutput () {
   const { cols, rows } = gridController.gridState;
   colsOutput.textContent = `${cols}칸`;

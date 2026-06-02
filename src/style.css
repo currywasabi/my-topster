@@ -92,10 +92,24 @@ body {
 .grid__title-item {
   display: block;
   font-size: clamp(0.1rem, 7cqw, 1rem);
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 
-  white-space: nowrap; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
-  overflow: hidden; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
-  text-overflow: ellipsis; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
+  /* 캡쳐 시 글자 잘리지 않게 하기 위한 패딩-마진 상쇄 (편법이다...) */
+  padding-bottom: 4px;
+  margin-bottom: -4px;
+  
+  line-height: 1.2;
+
+/* 
+  display: block;
+  font-size: clamp(0.1rem, 7cqw, 1rem); */
+
+  /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
 }
 
 .sidebar-container {
