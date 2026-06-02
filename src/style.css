@@ -34,17 +34,17 @@ body {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr) 1fr; /*앨범 + 제목*/
-  gap: 6px;
+  gap: clamp(3px, calc(10px - var(--cols)*1px), 6px);
+  padding: clamp(5px, calc(12px - var(--cols)*1px), 8px);
   background-color: #000000;
-  padding: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /*없어도 되지 않나?*/
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .grid #logo {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 35px;
+  bottom: 1%;
+  right: 0.5%;
+  width: 4%;
 }
 
 .grid__item {
@@ -82,15 +82,20 @@ body {
 }
 
 .grid__title-list {
+  display: block;
   color: #FAFAF8;
   list-style-type: none;
-  /* container-type: inline-size; */
+  container-type: inline-size;
+  width: 100%;
 }
 
 .grid__title-item {
-  white-space: nowrap;
-  font-size: 0.4rem;
-  /* font-size: clamp(0.2rem, 6cqi, 1rem); */
+  display: block;
+  font-size: clamp(0.1rem, 7cqw, 1rem);
+
+  white-space: nowrap; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
+  overflow: hidden; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
+  text-overflow: ellipsis; /* 타이틀 길이 가변 조정 못해서 일단 미봉책 */
 }
 
 .sidebar-container {
@@ -100,6 +105,7 @@ body {
   width: 85%; /*임시*/
   max-width: 600px;
   background-color: #000000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .search-bar{
@@ -148,6 +154,7 @@ body {
 .floating-controls__btn--download {
   background-color: #000000;
   color: #FAFAE8;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .floating-controls__btn--download:hover {
@@ -165,12 +172,15 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  position: relative;
+  z-index: 1; /* results 위에 표시하려고 */
   max-height: 50px;
   gap: 30px;
   border-radius: 25px;
   background-color: #FAFAE8;
   overflow: hidden;
   transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 /* 모바일 환경에선 열기 가능 / 닫기 불가능 */
