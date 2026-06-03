@@ -96,7 +96,7 @@ body {
   overflow: hidden; 
   text-overflow: ellipsis; 
 
-  /* 캡쳐 시 글자 잘리지 않게 하기 위한 패딩-마진 상쇄 (편법이다...) */
+  /* 캡쳐 시 글자 잘리지 않게 하기 위한 패딩-마진 상쇄 (편법이다...) (by 제미나이) */
   padding-bottom: 4px;
   margin-bottom: -4px;
   

@@ -17,9 +17,7 @@ export async function search(input) {
     if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
     
     const data = await res.json();
-    console.log(data);
     const releases = data.releases || [];
-    console.log(releases);
 
     renderCard(releases);
   } catch (e) {
