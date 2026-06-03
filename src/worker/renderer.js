@@ -45,7 +45,7 @@ export const renderGrid = (gridState) => {
     }
   }
 
-  const logoHTML = `<img src="image/logo_500X500.png" id="logo">`;
+  const logoHTML = `<img src="public/image/logo_500X500.png" id="logo">`;
 
   grid.style.setProperty('--cols', cols); // css 조절용
   grid.style.gridTemplateColumns = `repeat(${cols}, 1fr) 1fr`;
